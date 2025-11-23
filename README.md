@@ -47,3 +47,41 @@ Identify the most used payment types and build a revenue forecast for the next m
 ├── requirements.txt
 
 └── .env.example
+
+
+
+
+ 
+## Role: DB Analyst  Akmatbek uulu Beksultan
+Date: November 2025  
+
+## What I Delivered 
+
+1. Took one huge CSV → 541 909 rows  
+2. Normalized to 3NF  
+3. Created 7 clean tables (exceeded the minimum of 5)  
+4. Drew complete ER diagram with PK, FK and relationship types    
+5. Separated payments into its own table – ready for future extensions  
+
+## Final Database Structure – 7 Tables
+
+| Table         | Purpose                                         | Connected to                  |
+|---------------|-------------------------------------------------|-------------------------------|
+| Countries     | Country reference                               | ← Customers                   |
+| Customers     | Customers + country                             | → Orders                      |
+| Categories    | Product categories                              | ← Products                    |
+| Products      | Items (StockCode + Description)                 | → Order_Items                 |
+| Orders        | Orders (date, invoice, customer)                | → Order_Items, → Payments     |
+| Order_Items   | Order lines (quantity × unit price)             | –                             |
+| Payments      | Payment amount per order (separate entity)      | ← Orders (currently 1:1)      |
+
+## Why This Design?
+
+- No duplication: country, category, product description stored only once  
+- Payments in separate table → ready for partial payments, refunds, multiple transactions later  
+- All relationships via FOREIGN KEY constraints  
+
+## Repository Files
+
+- ER_Diagram.png – full schema with PK/FK and cardinalities  
+
