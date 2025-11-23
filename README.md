@@ -18,6 +18,17 @@
 → Normalized into 6+ relational tables
 
 ## Business Problems (Problem Statement)
+1️⃣ Identify the most profitable categories and products.
+Determine which categories and items generate the highest revenue and which ones perform poorly.
+
+2️⃣ Segment customers by behavior.
+Group customers (regulars, rare buyers, wholesalers) and find out who contributes the most to revenue.
+
+3️⃣ Analyze seasonality and sales patterns over time.
+Discover which months, weekdays, or hours have the highest and lowest sales.
+
+4️⃣ Analyze payments and forecast revenue.
+Identify the most used payment types and build a revenue forecast for the next month.
 
 
 ## Project Structure
