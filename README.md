@@ -3,6 +3,9 @@
 **Final Project · Databases Course 2025 · Lecturer: Nargiza Zhumalieva**
 
 
+**1st presentations link: https://www.canva.com/design/DAG5g5fJvSI/-yB799S38ei6-kn8VBERmA/edit?utm_content=DAG5g5fJvSI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton**
+
+
 ## Team Members
 | Role            | Name              | GitHub           |
 |-----------------|-------------------|------------------|
