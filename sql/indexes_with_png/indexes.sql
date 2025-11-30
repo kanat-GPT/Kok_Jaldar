@@ -1,0 +1,12 @@
+USE kokjaldar_db;
+
+SELECT 
+    TABLE_NAME,
+    INDEX_NAME,
+    COLUMN_NAME,
+    SEQ_IN_INDEX AS `POSITION`,
+    NON_UNIQUE,           -- 0 = UNIQUE или PK, 1 = обычный
+    INDEX_TYPE            -- всегда BTREE в InnoDB
+FROM INFORMATION_SCHEMA.STATISTICS 
+WHERE TABLE_SCHEMA = 'kok_jaldar_db'
+ORDER BY TABLE_NAME, INDEX_NAME, SEQ_IN_INDEX;
