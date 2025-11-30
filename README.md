@@ -86,5 +86,31 @@ Date: November 2025
 
 ## Repository Files
 
-- ER_Diagram.png – full schema with PK/FK and cardinalities  
+- ER_Diagram.png – full schema with PK/FK and cardinalities
+- 
+
+- ## Role: SQL Developer – Azimbai (@yaxaxaw)
+
+- Implemented full 7-table schema exactly according to the ER diagram  
+  (Countries → Customers → Orders → Order_Items → Products → Categories → Payments)
+- Wrote automated Python normalization script  
+  → transforms original 541 909-row CSV into 7 clean tables
+- Populated the database (all required tables exceed 1 000 rows):
+  - Order_Items 
+  - Customers   
+  - Products     
+  - Orders       
+  - Payments
+    
+- Created script for create tables     
+- Created 7 performance indexes
+- Provided complete DDL:
+  - `sql/create_tables.sql`
+  - `sql/indexes.sql`
+  - `sql/normalization_script.py` + 7 ready-to-import CSVs
+- Successfully loaded and verified everything in MySQL Workbench
+  
+SQL Developer role — completed 
+
+
 
