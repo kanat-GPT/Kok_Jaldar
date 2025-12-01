@@ -1,54 +1,49 @@
-from langchain.agents import AgentExecutor, create_tool_calling_agent
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_community.tools.sql_database.tool import QuerySQLDataBaseTool, InfoSQLDatabaseTool, ListSQLDatabaseTool
+from langchain_community.tools.sql_database.tool import QuerySQLDataBaseTool
 from langchain_community.utilities import SQLDatabase
+from langchain.agents import initialize_agent, AgentType
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.prompts import SystemMessagePromptTemplate
+from langchain.schema import SystemMessage
+import os
 
-# 1. Подключаемся к базе (у тебя уже есть db)
-# db = SQLDatabase.from_uri("твоя_строка_подключения")
 
-# 2. Создаём инструменты (обязательно!)
-tools = [
-    QuerySQLDataBaseTool(db=db),        # выполняет любые SQL-запросы
-    InfoSQLDatabaseTool(db=db),         # показывает структуру таблиц
-    ListSQLDatabaseTool(db=db),         # список таблиц
-]
+# --- API KEY ---
+os.environ["GOOGLE_API_KEY"] = "AIzaSyDxgUeydspoMTOUh0GzdFhBFYTmLPuPkww"
 
-# 3. Жёсткий промпт — чтобы агент вёл себя как надо
-prompt = ChatPromptTemplate.from_messages([
-    ("system", """
-Ты — аналитик данных в компании.
-Для каждой бизнес-задачи строго следуй шаблону:
+# --- DATABASE ---
+db = SQLDatabase.from_uri(
+    "mysql+mysqlconnector://root:0898811657@localhost:3306/qwer"
+)
+tool = QuerySQLDataBaseTool(db=db)
+system_message = SystemMessage(content="""
+Ты — SQL-ассистент, работающий строго с БД MySQL.
+Всегда используй синтаксис MySQL.
 
-1. Придумай понятное имя VIEW на английском в CamelCase (например: RevenueByCategory, TopProductsByMargin)
-2. Создай его: CREATE OR REPLACE VIEW имя_вью AS SELECT ...
-3. СРАЗУ ЖЕ выполни: SELECT * FROM имя_вью ORDER BY выручка DESC LIMIT 20
-4. В Final Answer покажи только:
-   - Короткий вывод на русском (2–3 предложения)
-   - Таблицу с результатами
+ЗАПРЕЩЕНО:
+- использовать sqlite_master
+- использовать PRAGMA
+- писать SQL для SQLite
+- использовать ключевые слова или функции SQLite
 
-НИКОГДА не заканчивай после CREATE VIEW.
-Всегда делай SELECT из только что созданного VIEW.
-Не пиши SQL в Final Answer, если пользователь явно не просит.
-"""),
-    ("placeholder", "{chat_history}"),
-    ("human", "{input}"),
-    ("placeholder", "{agent_scratchpad}"),
-])
-
-# 4. Создаём агента новым способом (2024–2025 стандарт)
-agent = create_tool_calling_agent(llm=llm, tools=tools, prompt=prompt)
-
-agent_executor = AgentExecutor(
-    agent=agent,
-    tools=tools,
-    verbose=True,
-    handle_parsing_errors=True,   # спасает от всех OutputParserException
-    max_iterations=20
+ОБЯЗАТЕЛЬНО:
+- Использовать INFORMATION_SCHEMA для получения списков таблиц
+- Использовать DESCRIBE или SHOW CREATE TABLE для структуры
+- Писать SQL, совместимый только с MySQL 5.7+ / MySQL 8+
+""")
+# --- LLM ---
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    temperature=0
 )
 
-# 5. Теперь можно запускать!
-result = agent_executor.invoke({
-    "input": "Какие категории и товары приносят больше всего выручки? Создай VIEW и покажи топ."
-})
+# --- AGENT ---
+agent = initialize_agent(
+    tools=[tool],
+    llm=llm,
+    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+    verbose=True
+)
 
-print(result["output"])
+# --- RUN ---
+response = agent.run("Сколько строк во всех таблицах?")
+print(response)
