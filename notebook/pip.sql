@@ -1,0 +1,1 @@
+!pip install google-generativeai langchain-google-vertexai langchain langchain-community pypdf faiss-cpu mysql-connector-python
