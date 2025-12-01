@@ -4,7 +4,7 @@
 
 
 **1st presentations link: https://www.canva.com/design/DAG5g5fJvSI/-yB799S38ei6-kn8VBERmA/edit?utm_content=DAG5g5fJvSI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton**
-
+**2nd presentation link : https://www.canva.com/design/DAG54gzrnZo/ymaoFgNuVNZt6vQI-gHu3w/edit?utm_content=DAG54gzrnZo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton**
 
 ## Team Members
 | Role            | Name              | GitHub           |
@@ -21,8 +21,8 @@
 → Normalized into 6+ relational tables
 
 ## Business Problems (Problem Statement)
-1️⃣ Identify the most profitable categories and products.
-Determine which categories and items generate the highest revenue and which ones perform poorly.
+1️⃣ Analyze Marketing
+We need to understand which countries to invest marketing budget in.
 
 2️⃣ Segment customers by behavior.
 Group customers (regulars, rare buyers, wholesalers) and find out who contributes the most to revenue.
@@ -30,8 +30,10 @@ Group customers (regulars, rare buyers, wholesalers) and find out who contribute
 3️⃣ Analyze seasonality and sales patterns over time.
 Discover which months, weekdays, or hours have the highest and lowest sales.
 
-4️⃣ Analyze payments and forecast revenue.
-Identify the most used payment types and build a revenue forecast for the next month.
+4️⃣ Giant identification. Need to identify top customers by LTV who generate the most revenue and give them discounts/VIP status.
+
+
+
 
 
 ## Project Structure
@@ -111,6 +113,33 @@ Date: November 2025
 - Successfully loaded and verified everything in MySQL Workbench
   
 SQL Developer role — completed 
+
+
+## Role: AI Engenner - Emirkhan
+
+## My Responsibilities :
+ Connecting MySQL database to Python (Jupyter Notebook)
+ Setting up LangChain environment + Gemini LLM
+ Implementing a text-to-SQL AI agent
+ Automating SQL query generation from natural language
+ Solve all 4 business problems with the help of an AI agent.
+ Creating analytical VIEWs based on AI-generated insights.
+
+
+ ## What I actually did :
+ Connected to our final MySQL database delivered by azimbay kokjal
+ Checked the tables, relationships, and overall structure
+ Looked through the data to understand how everything is linked
+ Prepared database context so the AI could understand the schema
+ Turned business questions into clear analytical tasks
+
+ Ai Engineer role — completed !
+
+ 
+
+
+
+
 
 
 
